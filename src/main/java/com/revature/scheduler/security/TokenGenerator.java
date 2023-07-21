@@ -4,6 +4,8 @@ import com.revature.scheduler.daos.UserDAO;
 import com.revature.scheduler.models.User;
 
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +40,7 @@ public class TokenGenerator {
         return Jwts.builder()
             .setSubject(email)
             .claim("id", user.getId())
-//            .claim("role", user)
+            .claim("role", user)
             .claim("first_name", user.getFirstName())
             .claim("last_name", user.getLastName())
             .setIssuedAt(Date.from(issued))
@@ -60,5 +62,17 @@ public class TokenGenerator {
         }
     }
 
+    public String getEmailFromToken(String token) {
+        if (token != null && token.startsWith("Bearer ")) {
+            token = token.substring(7);
+        }
 
+        Claims claims = Jwts.parserBuilder()
+            .setSigningKey(secretKey)
+            .build()
+            .parseClaimsJwt(token)
+            .getBody();
+
+        return claims.getSubject();
+    }
 }

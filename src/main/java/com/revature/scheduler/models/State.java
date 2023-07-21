@@ -15,7 +15,8 @@ import javax.persistence.*;
 public class State {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int stateId;
+    @Column(name = "state_id")
+    private int id;
 
     private String name;
 }

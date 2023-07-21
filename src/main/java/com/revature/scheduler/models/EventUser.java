@@ -15,7 +15,8 @@ import javax.persistence.*;
 public class EventUser {
 
     @Id
-    private int eventUserId;
+    @Column(name = "event_user_id")
+    private int id;
 
     @ManyToOne
     @JoinColumn(name = "event_id")
