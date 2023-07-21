@@ -25,8 +25,13 @@ public class User {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "username")
-    private String username;
+//    @Column(name = "username")
+//    private String username;
+
+    @Column(name = "email")
+    private String email;
+
+
 
     @OneToMany(mappedBy = "event")
     private List<EventUser> eventList;
