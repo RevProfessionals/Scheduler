@@ -59,7 +59,16 @@ public class AuthController {
         passwordEncoder.encode(registerDTO.getPassword())
     );
 
-    return new ResponseEntity<>(userDAO.save(user), HttpStatus.CREATED);
+    userDAO.save(user);
+
+    Authentication authentication = new UsernamePasswordAuthenticationToken(
+        user.getEmail(),
+        user.getPassword()
+    );
+
+    String token = tokenGenerator.generateToken(authentication);
+
+    return new ResponseEntity<>(new AuthDTO(token), HttpStatus.CREATED);
   }
 
   @PostMapping("/login")
