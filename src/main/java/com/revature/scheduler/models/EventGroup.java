@@ -25,7 +25,7 @@ public class EventGroup {
     @OneToOne
     private User owner;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", targetEntity = EventGroupUser.class)
     private List<EventGroupUser> userWithAccess;
 
 }

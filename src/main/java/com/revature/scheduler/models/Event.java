@@ -41,7 +41,7 @@ public class Event {
     @ManyToOne
     private User author;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", targetEntity = EventUser.class)
     private List<EventUser> participant;
 
 }

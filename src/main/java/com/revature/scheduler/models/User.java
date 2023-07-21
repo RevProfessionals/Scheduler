@@ -1,6 +1,5 @@
 package com.revature.scheduler.models;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,10 +33,10 @@ public class User {
     @ManyToOne
     private Role role;
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event", targetEntity = EventUser.class)
     private List<EventUser> eventList;
 
-    @OneToMany(mappedBy = "eventGroup")
+    @OneToMany(mappedBy = "eventGroup", targetEntity = EventGroupUser.class)
     private List<EventGroupUser> eventGroupAccessor;
 
 }

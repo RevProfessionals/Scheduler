@@ -20,6 +20,7 @@ public class EventGroupUser {
     @ManyToOne
     @JoinColumn(name = "event_group_id")
     private EventGroup eventGroup;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
