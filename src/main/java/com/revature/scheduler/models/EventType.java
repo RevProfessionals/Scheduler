@@ -16,7 +16,7 @@ public class EventType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
+    private int eventTypeId;
 
     @Column(name = "type_name")
     private String name;

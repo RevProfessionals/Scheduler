@@ -17,7 +17,7 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
+    private int userId;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -25,13 +25,14 @@ public class User {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-//    @Column(name = "username")
-//    private String username;
-
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
+    @Column(name = "password", nullable = false)
+    private String password;
 
+    @ManyToOne
+    private Role role;
 
     @OneToMany(mappedBy = "event")
     private List<EventUser> eventList;

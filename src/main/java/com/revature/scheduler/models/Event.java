@@ -18,7 +18,7 @@ public class Event {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int eventId;
 
     @Column(name = "event_name", nullable = false)
     private String name;
@@ -26,8 +26,11 @@ public class Event {
     @Column(name = "event_date", nullable = false)
     private LocalDate date;
 
-    @Column(name = "event_time", nullable = false)
-    private LocalTime time;
+    @Column(name = "event_start_time", nullable = false)
+    private LocalTime startTime;
+
+    @Column(name = "event_end_time", nullable = false)
+    private LocalTime endTime;
 
     @ManyToOne
     private EventType type;
