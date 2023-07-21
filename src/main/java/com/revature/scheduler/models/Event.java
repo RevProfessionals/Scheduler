@@ -18,7 +18,8 @@ public class Event {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int eventId;
+    @Column(name = "event_id")
+    private int id;
 
     @Column(name = "event_name", nullable = false)
     private String name;
@@ -41,7 +42,7 @@ public class Event {
     @ManyToOne
     private User author;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", targetEntity = EventUser.class)
     private List<EventUser> participant;
 
 }
