@@ -58,21 +58,25 @@ public class AuthController {
         registerDTO.getEmail(),
         passwordEncoder.encode(registerDTO.getPassword())
     );
+    userDAO.save(user);
 
-    return new ResponseEntity<>(userDAO.save(user), HttpStatus.CREATED);
+    Authentication authentication = new UsernamePasswordAuthenticationToken(
+        user.getEmail(),
+        user.getPassword()
+    );
+
+    String token = tokenGenerator.generateToken(authentication);
+    return new ResponseEntity<>(new AuthDTO(token), HttpStatus.CREATED);
   }
 
   @PostMapping("/login")
   public ResponseEntity<AuthDTO> login(@RequestBody LoginDTO loginDTO) {
-    System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAA"+loginDTO.getEmail()+ " -- "+loginDTO.getPassword());
     Authentication authentication = authManager.authenticate(
         new UsernamePasswordAuthenticationToken(
             loginDTO.getEmail(),
             loginDTO.getPassword()
         )
     );
-
-    System.out.println("PPPPPPPPPPPPPPPP "+ authentication.toString());
 
     SecurityContextHolder.getContext().setAuthentication(authentication);
 
