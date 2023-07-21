@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -33,7 +34,8 @@ public class UDService implements UserDetailsService {
     return new org.springframework.security.core.userdetails.User(
         u.getEmail(),
         u.getPassword(),
-        mapRoleToAuthority(u.getRole())
+        Collections.emptyList() // We don't have any Role on the User, but we need to include something...
+//        mapRoleToAuthority(u.getRole())
     );
 
   }
