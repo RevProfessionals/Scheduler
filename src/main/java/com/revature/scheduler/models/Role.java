@@ -5,27 +5,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 
 @Entity
-@Table(name = "event_groups")
-public class EventGroup {
-
+@Table(name = "roles")
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int eventGroupId;
+    private int roleId;
 
-    @ManyToOne
-    private Event event;
-
-    @OneToOne
-    private User owner;
-
-    @OneToMany(mappedBy = "user")
-    private List<EventGroupUser> userWithAccess;
+    @Column(name = "name")
+    private String name;
 
 }
