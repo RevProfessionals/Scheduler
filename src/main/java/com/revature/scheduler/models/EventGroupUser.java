@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class EventGroupUser {
 
     @Id
-    private int Id;
+    private int eventGroupUserId;
 
     @ManyToOne
     @JoinColumn(name = "event_group_id")
