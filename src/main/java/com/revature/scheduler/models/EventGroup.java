@@ -17,7 +17,8 @@ public class EventGroup {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int eventGroupId;
+    @Column(name = "event_group_id")
+    private int id;
 
     @ManyToOne
     private Event event;
@@ -25,7 +26,7 @@ public class EventGroup {
     @OneToOne
     private User owner;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", targetEntity = EventGroupUser.class)
     private List<EventGroupUser> userWithAccess;
 
 }
