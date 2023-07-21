@@ -17,7 +17,8 @@ public class EventGroup {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int eventGroupId;
+    @Column(name = "event_group_id")
+    private int id;
 
     @ManyToOne
     private Event event;

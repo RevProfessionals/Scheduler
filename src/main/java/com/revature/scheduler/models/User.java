@@ -16,7 +16,8 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userId;
+    @Column(name = "user_id")
+    private int id;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -39,4 +40,10 @@ public class User {
     @OneToMany(mappedBy = "eventGroup", targetEntity = EventGroupUser.class)
     private List<EventGroupUser> eventGroupAccessor;
 
+    public User(String firstName, String lastName, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+    }
 }
