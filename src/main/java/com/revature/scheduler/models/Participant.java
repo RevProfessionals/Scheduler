@@ -11,16 +11,15 @@ import javax.persistence.*;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "event_group_user")
-public class EventGroupUser {
-
+@Table(name = "participant")
+public class Participant {
     @Id
-    @Column(name = "event_group_user_id")
+    @Column(name ="participant_id")
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "event_group_id")
-    private EventGroup eventGroup;
+    @JoinColumn(name = "event_id")
+    private Event event;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

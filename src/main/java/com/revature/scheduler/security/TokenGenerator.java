@@ -5,7 +5,6 @@ import com.revature.scheduler.models.User;
 
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,17 +61,14 @@ public class TokenGenerator {
         }
     }
 
-    public String getEmailFromToken(String token) {
+    public Claims getClaims(String token) {
         if (token != null && token.startsWith("Bearer ")) {
             token = token.substring(7);
         }
-
-        Claims claims = Jwts.parserBuilder()
+        return Jwts.parserBuilder()
             .setSigningKey(secretKey)
             .build()
             .parseClaimsJwt(token)
             .getBody();
-
-        return claims.getSubject();
     }
 }
