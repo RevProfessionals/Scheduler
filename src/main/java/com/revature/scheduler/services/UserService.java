@@ -50,7 +50,7 @@ public class UserService {
         User u = userDAO.getReferenceById(id);
         Role r = new Role();
 
-        r.setRoleId(roleId);
+        r.setId(roleId);
         u.setRole(r);
 
         return userDAO.save(u);
