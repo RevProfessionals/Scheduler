@@ -3,6 +3,7 @@ package com.revature.scheduler.services;
 import com.revature.scheduler.daos.EventDAO;
 import com.revature.scheduler.daos.LocationDAO;
 import com.revature.scheduler.daos.UserDAO;
+import com.revature.scheduler.dtos.EventDTO;
 import com.revature.scheduler.models.Event;
 import com.revature.scheduler.models.Location;
 import com.revature.scheduler.models.User;
@@ -35,18 +36,19 @@ public class EventService {
         return eventDAO.findAllByAuthor(userId) ;
     }
 
-    public Event createEvent(int userId, Event event){
+
+    public Event createEvent(int userId, EventDTO eventDTO){
         Event e= new Event();
-        e.setName(event.getName());
-        e.setDate(event.getDate());
-        e.setStartTime(event.getStartTime());
-        e.setEndTime(event.getEndTime());
-        e.setType(event.getType());
+        e.setName(eventDTO.getName());
+        e.setDate(eventDTO.getDate());
+        e.setStartTime(eventDTO.getStartTime());
+        e.setEndTime(eventDTO.getEndTime());
+        e.setType(eventDTO.getType());
 
         User u = userDAO.findById(userId).get();
         e.setAuthor(u);
 
-        Location l = event.getLocation();
+        Location l = eventDTO.getLocation();
         locationDAO.save(l);
         e.setLocation(l);
 

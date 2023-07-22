@@ -1,6 +1,7 @@
 package com.revature.scheduler.services;
 
 import com.revature.scheduler.daos.UserDAO;
+import com.revature.scheduler.dtos.UserDTO;
 import com.revature.scheduler.models.Role;
 import com.revature.scheduler.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,20 +28,20 @@ public class UserService {
         return userDAO.findByEmail(email);
     }
 
-    public User updateUser(int id, User user){
+    public User updateUser(int id, UserDTO userDTO){
         User u = userDAO.getReferenceById(id);
 
-        if(user.getEmail() != null){
-            u.setEmail(user.getEmail());
+        if(userDTO.getEmail() != null){
+            u.setEmail(userDTO.getEmail());
         }
-        if(user.getFirstName() != null){
-            u.setFirstName(user.getFirstName());
+        if(userDTO.getFirstName() != null){
+            u.setFirstName(userDTO.getFirstName());
         }
-        if(user.getLastName() != null){
-            u.setLastName(user.getLastName());
+        if(userDTO.getLastName() != null){
+            u.setLastName(userDTO.getLastName());
         }
-        if(user.getPassword() != null){
-            u.setPassword(user.getPassword());
+        if(userDTO.getPassword() != null){
+            u.setPassword(userDTO.getPassword());
         }
         return userDAO.save(u);
     }

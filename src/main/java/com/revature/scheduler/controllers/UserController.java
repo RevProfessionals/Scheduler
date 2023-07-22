@@ -1,5 +1,6 @@
 package com.revature.scheduler.controllers;
 
+import com.revature.scheduler.dtos.UserDTO;
 import com.revature.scheduler.models.User;
 import com.revature.scheduler.services.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -28,8 +29,8 @@ public class UserController {
     }
 
     @PutMapping("{id}")
-    public User updateUserHandler(@PathVariable("id") int id, @RequestBody User user){
-        return userService.updateUser(id,user);
+    public User updateUserHandler(@PathVariable("id") int id, @RequestBody UserDTO userDTO){
+        return userService.updateUser(id,userDTO);
     }
 
     @PutMapping("{id}/role/{roleId}")

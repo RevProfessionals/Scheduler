@@ -1,6 +1,7 @@
 package com.revature.scheduler.controllers;
 
 
+import com.revature.scheduler.dtos.EventDTO;
 import com.revature.scheduler.models.Event;
 import com.revature.scheduler.services.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +33,8 @@ public class EventController {
     }
 
     @PostMapping("user/{id}")
-    public Event createEventHandler(@PathVariable("id") int userId, @RequestBody Event event){
-        return eventService.createEvent(userId,event);
+    public Event createEventHandler(@PathVariable("id") int userId, @RequestBody EventDTO eventDTO){
+        return eventService.createEvent(userId,eventDTO);
     }
 
     @PutMapping("{id}")
