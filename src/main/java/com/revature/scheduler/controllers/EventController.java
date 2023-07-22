@@ -7,6 +7,7 @@ import com.revature.scheduler.services.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -24,6 +25,11 @@ public class EventController {
     @GetMapping("{id}")
     public Event getEventByIdHandler(@PathVariable("id") int eventId){
         return eventService.getEventById(eventId);
+    }
+
+    @GetMapping("user/{id}")
+    public List<Event> getAllByUserIdHandler(@PathVariable("id") int userId){
+        return eventService.getAllByUserId(userId);
     }
 
     @PostMapping("user/{id}")

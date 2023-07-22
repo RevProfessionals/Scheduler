@@ -10,6 +10,7 @@ import com.revature.scheduler.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,6 +31,11 @@ public class EventService {
     public Event getEventById(int eventId) {
         return eventDAO.findById(eventId).get();
     }
+
+    public List<Event> getAllByUserId(int userId) {
+        return eventDAO.findAllByAuthor(userId) ;
+    }
+
 
     public Event createEvent(int userId, EventDTO eventDTO){
         Event e= new Event();
@@ -77,4 +83,6 @@ public class EventService {
 
         return eventDAO.save(e);
     }
+
+
 }
