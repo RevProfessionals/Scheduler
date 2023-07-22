@@ -34,11 +34,9 @@ public class User {
     @ManyToOne
     private Role role;
 
-    @OneToMany(mappedBy = "event", targetEntity = EventUser.class)
-    private List<EventUser> eventList;
+    @OneToMany(mappedBy = "shared", targetEntity = SharedUser.class)
+    private List<SharedUser> sharedUsers;
 
-    @OneToMany(mappedBy = "eventGroup", targetEntity = EventGroupUser.class)
-    private List<EventGroupUser> eventGroupAccessor;
 
     public User(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;

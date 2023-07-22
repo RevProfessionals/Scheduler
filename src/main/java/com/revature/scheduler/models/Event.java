@@ -40,9 +40,9 @@ public class Event {
     private Location location;
 
     @ManyToOne
-    private User author;
+    private User owner;
 
-    @OneToMany(mappedBy = "user", targetEntity = EventUser.class)
-    private List<EventUser> participant;
+    @OneToMany(mappedBy = "shared", targetEntity = SharedUser.class)
+    private List<SharedUser> participant;
 
 }

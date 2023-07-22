@@ -26,4 +26,11 @@ public class Location {
 
     @ManyToOne
     private State state;
+
+
+    public Location(String streetAddress, String city, State state) {
+        this.streetAddress = streetAddress;
+        this.city = city;
+        this.state = state;
+    }
 }

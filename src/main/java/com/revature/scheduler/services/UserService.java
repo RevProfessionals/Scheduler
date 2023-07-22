@@ -1,8 +1,11 @@
 package com.revature.scheduler.services;
 
+import com.revature.scheduler.daos.RoleDAO;
+import com.revature.scheduler.daos.SharedUserDAO;
 import com.revature.scheduler.daos.UserDAO;
 import com.revature.scheduler.dtos.UserDTO;
 import com.revature.scheduler.models.Role;
+import com.revature.scheduler.models.SharedUser;
 import com.revature.scheduler.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,11 +16,14 @@ import java.util.Optional;
 public class UserService {
 
     private final UserDAO userDAO;
-
+    private final RoleDAO roleDAO;
+    private final SharedUserDAO sharedUserDAO;
 
     @Autowired
-    public UserService(UserDAO userDAO) {
+    public UserService(UserDAO userDAO, RoleDAO roleDAO, RoleDAO roleDAO1, SharedUserDAO sharedUserDAO) {
         this.userDAO = userDAO;
+        this.roleDAO = roleDAO1;
+        this.sharedUserDAO = sharedUserDAO;
     }
 
     public Optional<User> getUserById(int id){
@@ -29,37 +35,45 @@ public class UserService {
     }
 
     public User updateUser(int id, UserDTO userDTO){
-        User u = userDAO.getReferenceById(id);
+        User user = userDAO.findById(id).orElseThrow();
 
         if(userDTO.getEmail() != null){
-            u.setEmail(userDTO.getEmail());
+            user.setEmail(userDTO.getEmail());
         }
         if(userDTO.getFirstName() != null){
-            u.setFirstName(userDTO.getFirstName());
+            user.setFirstName(userDTO.getFirstName());
         }
         if(userDTO.getLastName() != null){
-            u.setLastName(userDTO.getLastName());
+            user.setLastName(userDTO.getLastName());
         }
         if(userDTO.getPassword() != null){
-            u.setPassword(userDTO.getPassword());
+            user.setPassword(userDTO.getPassword());
         }
-        return userDAO.save(u);
+        return userDAO.save(user);
     }
 
-    public User updateUserRole(int id, int roleId){
-        User u = userDAO.getReferenceById(id);
-        Role r = new Role();
+    public SharedUser shareWithUser(int ownerId, int sharedUserId, String roleName){
+        User owner = userDAO.findById(ownerId).orElseThrow();
+        User sharedUser = userDAO.findById(sharedUserId).orElseThrow();
+        Role role = roleDAO.findByName(roleName).orElseThrow();
 
-        r.setId(roleId);
-        u.setRole(r);
+        SharedUser shared = new SharedUser(owner,sharedUser,role);
 
-        return userDAO.save(u);
+        return sharedUserDAO.save(shared);
+    }
+
+    public SharedUser updateSharedUser(int ownerId, int sharedUserId, String roleName){
+        Role role = roleDAO.findByName(roleName).orElseThrow();
+        SharedUser shared = sharedUserDAO.findByOwnerAndShared(ownerId, sharedUserId).orElseThrow();
+        shared.setRole(role);
+        return sharedUserDAO.save(shared);
+
     }
 
     public boolean deleteUserById(int id){
         if(userDAO.existsById(id)){
-            User u = userDAO.getReferenceById(id);
-            userDAO.delete(u);
+            User user = userDAO.getReferenceById(id);
+            userDAO.delete(user);
             return true;
         }
         return false;

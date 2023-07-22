@@ -34,7 +34,7 @@ public class JWTFilter extends OncePerRequestFilter {
 
     if(token != null && tokenGenerator.validateToken(token)) {
       UserDetails user = udService.loadUserByUsername(
-          tokenGenerator.getEmailFromToken(token)
+          tokenGenerator.getClaims(token).getSubject()
       );
 
       UsernamePasswordAuthenticationToken authToken =

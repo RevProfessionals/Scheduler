@@ -1,29 +1,34 @@
 package com.revature.scheduler.controllers;
 
 import com.revature.scheduler.dtos.UserDTO;
+import com.revature.scheduler.models.Event;
+import com.revature.scheduler.models.SharedUser;
 import com.revature.scheduler.models.User;
+import com.revature.scheduler.services.EventService;
 import com.revature.scheduler.services.UserService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("user")
+@RequestMapping("users")
 @CrossOrigin(origins = {"http://localhost:3000","http://127.0.0.1:5500"})
 public class UserController {
     private final UserService userService;
+    private final EventService eventService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, EventService eventService) {
         this.userService = userService;
+        this.eventService = eventService;
     }
-
 
     @GetMapping("{id}")
     public Optional<User> getUserByIdHandler(@PathVariable("id") int id){
         return userService.getUserById(id);
     }
 
-    @GetMapping("email/{email}")
+    @GetMapping("emails/{email}")
     public User getUserByEmailHandler(@PathVariable("email") String email){
         return userService.getUserByEmail(email);
     }
@@ -33,9 +38,10 @@ public class UserController {
         return userService.updateUser(id,userDTO);
     }
 
-    @PutMapping("{id}/role/{roleId}")
-    public User updateUserRoleHandler(@PathVariable("id")int id, @PathVariable("roleId") int roleId){
-        return userService.updateUserRole(id,roleId);
+    //Extend getAll to allow us to see events by a user that shares their events with us
+    @GetMapping("{id}/events")
+    public List<Event> getAllByUserIdHandler(@PathVariable("id") int userId){
+        return eventService.getAllByUserId(userId);
     }
 
     @DeleteMapping("{id}")
@@ -43,6 +49,9 @@ public class UserController {
         return userService.deleteUserById(id);
     }
 
+    @PostMapping("{id}/shared/{sharedId}")
+    public SharedUser shareWithUserHandler(@PathVariable("id") int ownerId, @PathVariable("sharedId") int sharedId, @RequestBody String roleName){return userService.shareWithUser(ownerId,sharedId,roleName);}
 
-
+    @PutMapping("{id}/shared/{sharedId}")
+    public SharedUser updateSharedUserRole(@PathVariable("id") int ownerId, @PathVariable("sharedId") int sharedId, @RequestBody String roleName){return userService.updateSharedUser(ownerId,sharedId,roleName);}
 }

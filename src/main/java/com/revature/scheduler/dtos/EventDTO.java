@@ -1,7 +1,6 @@
 package com.revature.scheduler.dtos;
 
 import com.revature.scheduler.models.EventType;
-import com.revature.scheduler.models.Location;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -17,6 +16,6 @@ public class EventDTO {
     private LocalDate date;
     private LocalTime startTime;
     private LocalTime endTime;
-    private EventType type;
-    private Location location;
+    private String type;
+    private LocationDTO location;
 }
