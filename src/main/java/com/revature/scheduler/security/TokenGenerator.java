@@ -68,7 +68,7 @@ public class TokenGenerator {
         return Jwts.parserBuilder()
             .setSigningKey(secretKey)
             .build()
-            .parseClaimsJwt(token)
+            .parseClaimsJws(token)
             .getBody();
     }
 }
