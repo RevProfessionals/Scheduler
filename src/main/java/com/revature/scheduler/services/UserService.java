@@ -79,6 +79,33 @@ public class UserService {
         return false;
     }
 
-
+    //if you want to see everyone that shared a calendar with a specific user
+    //
+    ///users/{id}/calendars (gets list of all owner IDs that share a calendar with you)
+    //
+    //then use findUserByID to get the user object for each owner ID
+    //[
+    //{
+    //   firstName:""
+    //   lastName:""
+    //   email:""
+    //   events: [{},{},{}]
+    //
+    //}
+    //{
+    //   firstName:""
+    //   lastName:""
+    //   email:""
+    //   events: [{},{},{}]
+    //
+    //}
+    //{
+    //   firstName:""
+    //   lastName:""
+    //   email:""
+    //   events: [{},{},{}]
+    //
+    //}
+    //]
 
 }
