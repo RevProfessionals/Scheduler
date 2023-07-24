@@ -19,6 +19,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.regex.Pattern;
+
 @RestController
 @RequestMapping("auth")
 @CrossOrigin(origins = {"http://localhost:3000", "http://127.0.0.1:5500"})
@@ -31,6 +33,9 @@ public class AuthController {
   private final RoleDAO roleDAO;
   private final PasswordEncoder passwordEncoder;
   private final TokenGenerator tokenGenerator;
+
+  private String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." + "[a-zA-Z0-9_+&*-]+)*@" + "(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+
 
   @Autowired
   public AuthController(AuthenticationManager authManager, UserDAO userDAO,
@@ -52,12 +57,19 @@ public class AuthController {
       return new ResponseEntity<>("Email is already in use ", HttpStatus.BAD_REQUEST);
     }
 
+    Pattern pattern = Pattern.compile(emailRegex);
+    if(!pattern.matcher(registerDTO.getEmail()).matches()){
+      return new ResponseEntity<>("Invalid Email", HttpStatus.BAD_REQUEST);
+    }
+
     User user = new User(
         registerDTO.getFirstName(),
         registerDTO.getLastName(),
         registerDTO.getEmail(),
         passwordEncoder.encode(registerDTO.getPassword())
     );
+
+
     userDAO.save(user);
 
     Authentication authentication = new UsernamePasswordAuthenticationToken(
