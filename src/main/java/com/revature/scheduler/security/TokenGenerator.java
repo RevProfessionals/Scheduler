@@ -39,7 +39,7 @@ public class TokenGenerator {
         return Jwts.builder()
             .setSubject(email)
             .claim("id", user.getId())
-            .claim("role", user)
+//            .claim("role", user)
             .claim("first_name", user.getFirstName())
             .claim("last_name", user.getLastName())
             .setIssuedAt(Date.from(issued))
