@@ -54,4 +54,10 @@ public class UserController {
 
     @PutMapping("{id}/shared/{sharedId}")
     public SharedUser updateSharedUserRole(@PathVariable("id") int ownerId, @PathVariable("sharedId") int sharedId, @RequestBody String roleName){return userService.updateSharedUser(ownerId,sharedId,roleName);}
+
+    @GetMapping("{id}/calendars")
+    public List<User> getSharedCalendars(@PathVariable("id") int userId) {
+        return userService.findUsersWithSharedCalendar(userId);
+    }
+
 }

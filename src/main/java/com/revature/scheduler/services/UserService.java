@@ -3,14 +3,20 @@ package com.revature.scheduler.services;
 import com.revature.scheduler.daos.RoleDAO;
 import com.revature.scheduler.daos.SharedUserDAO;
 import com.revature.scheduler.daos.UserDAO;
+import com.revature.scheduler.dtos.SharedUserDTO;
 import com.revature.scheduler.dtos.UserDTO;
 import com.revature.scheduler.models.Role;
 import com.revature.scheduler.models.SharedUser;
 import com.revature.scheduler.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -18,6 +24,7 @@ public class UserService {
     private final UserDAO userDAO;
     private final RoleDAO roleDAO;
     private final SharedUserDAO sharedUserDAO;
+    private SharedUserDTO sharedUserDTO;
 
     @Autowired
     public UserService(UserDAO userDAO, RoleDAO roleDAO, RoleDAO roleDAO1, SharedUserDAO sharedUserDAO) {
@@ -78,6 +85,11 @@ public class UserService {
         }
         return false;
     }
+
+    public List<User> findUsersWithSharedCalendar(int userId) {
+        return userDAO.findUsersWithSharedCalendar(userId);
+    }
+//    public List<SharedUserDTO> getSharedCalendars(@PathVariable("id")int userId) {}
 
     //if you want to see everyone that shared a calendar with a specific user
     //
