@@ -85,27 +85,27 @@ public class UserService {
     //
     //then use findUserByID to get the user object for each owner ID
     //[
-    //{
-    //   firstName:""
-    //   lastName:""
-    //   email:""
-    //   events: [{},{},{}]
+    //  {
+    //      firstName:""
+    //      lastName:""
+    //      email:""
+    //      events: [{},{},{}]
     //
-    //}
-    //{
-    //   firstName:""
-    //   lastName:""
-    //   email:""
-    //   events: [{},{},{}]
+    //  }
+    //  {
+    //      firstName:""
+    //      lastName:""
+    //      email:""
+    //      events: [{},{},{}]
     //
-    //}
-    //{
-    //   firstName:""
-    //   lastName:""
-    //   email:""
-    //   events: [{},{},{}]
+    //  }
+    //  {
+    //      firstName:""
+    //      lastName:""
+    //      email:""
+    //      events: [{},{},{}]
     //
-    //}
+    //  }
     //]
 
 }
