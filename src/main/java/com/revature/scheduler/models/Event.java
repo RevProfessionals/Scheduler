@@ -24,8 +24,11 @@ public class Event {
     @Column(name = "event_name", nullable = false)
     private String name;
 
-    @Column(name = "event_date", nullable = false)
-    private LocalDate date;
+    @Column(name = "event_start_date", nullable = false)
+    private LocalDate startDate;
+
+    @Column(name = "event_end_date", nullable = false)
+    private LocalDate endDate;
 
     @Column(name = "event_start_time", nullable = false)
     private LocalTime startTime;

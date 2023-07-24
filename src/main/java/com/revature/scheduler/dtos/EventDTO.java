@@ -13,7 +13,8 @@ import java.time.LocalTime;
 public class EventDTO {
 
     private String name;
-    private LocalDate date;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private LocalTime startTime;
     private LocalTime endTime;
     private String type;

@@ -39,7 +39,8 @@ public class EventService {
     public Event createEvent(int userId, EventDTO eventDTO){
         Event event= new Event();
         event.setName(eventDTO.getName());
-        event.setDate(eventDTO.getDate());
+        event.setStartDate(eventDTO.getStartDate());
+        event.setEndDate(eventDTO.getEndDate());
         event.setStartTime(eventDTO.getStartTime());
         event.setEndTime(eventDTO.getEndTime());
         event.setType(eventTypeDAO.findByName(eventDTO.getType()).orElseThrow());
@@ -63,8 +64,10 @@ public class EventService {
         if(eventDTO.getName() != null){
             event.setName(eventDTO.getName());
         }
-        if(eventDTO.getDate() != null){
-            event.setDate(eventDTO.getDate());
+        if(eventDTO.getStartDate() != null){
+            event.setStartDate(eventDTO.getStartDate());
+        }if(eventDTO.getEndDate() != null){
+            event.setEndDate(eventDTO.getEndDate());
         }
         if(eventDTO.getStartTime()!=null){
             event.setStartTime(eventDTO.getStartTime());
