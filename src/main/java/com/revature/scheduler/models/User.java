@@ -1,5 +1,6 @@
 package com.revature.scheduler.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,6 +36,7 @@ public class User {
     private Role role;
 
     @OneToMany(mappedBy = "shared", targetEntity = SharedUser.class)
+    @JsonManagedReference
     private List<SharedUser> sharedUsers;
 
 

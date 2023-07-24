@@ -1,5 +1,6 @@
 package com.revature.scheduler.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,15 +17,18 @@ public class SharedUser {
 
     @Id
     @Column(name = "shared_user_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @ManyToOne
     @JoinColumn(name = "owner_id")
+    @JsonBackReference
     private User owner;
 
 
     @ManyToOne
     @JoinColumn(name = "shared_id")
+    @JsonBackReference
     private User shared;
 
     @ManyToOne
