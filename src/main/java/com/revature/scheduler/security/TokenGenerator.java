@@ -2,8 +2,6 @@ package com.revature.scheduler.security;
 
 import com.revature.scheduler.daos.UserDAO;
 import com.revature.scheduler.models.User;
-
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

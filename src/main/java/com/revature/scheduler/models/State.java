@@ -18,5 +18,6 @@ public class State {
     @Column(name = "state_id")
     private int id;
 
+    @Column(name = "name", unique = true)
     private String name;
 }

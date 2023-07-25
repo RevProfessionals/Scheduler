@@ -12,7 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "shared_user")
+@Table(name = "shared_users")
 public class SharedUser {
 
     @Id
@@ -24,7 +24,6 @@ public class SharedUser {
     @JoinColumn(name = "owner_id")
     @JsonBackReference
     private User owner;
-
 
     @ManyToOne
     @JoinColumn(name = "shared_id")

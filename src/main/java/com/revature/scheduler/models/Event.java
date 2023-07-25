@@ -1,12 +1,15 @@
 package com.revature.scheduler.models;
 
+import com.revature.scheduler.dtos.LocationDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
-import java.time.*;
+import java.util.Optional;
 
 @Data
 @AllArgsConstructor
@@ -37,15 +40,19 @@ public class Event {
     private LocalTime endTime;
 
     @ManyToOne
+    @JoinColumn(name = "type_id")
     private EventType type;
 
     @ManyToOne
+    @JoinColumn(name = "location_id")
     private Location location;
 
     @ManyToOne
+    @JoinColumn(name = "owner_id")
     private User owner;
 
     @OneToMany(mappedBy = "shared", targetEntity = SharedUser.class)
+    @Column(name = "participant")
     private List<SharedUser> participant;
 
 }

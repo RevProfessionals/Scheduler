@@ -11,10 +11,11 @@ import javax.persistence.*;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "participant")
+@Table(name = "participants")
 public class Participant {
     @Id
     @Column(name ="participant_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @ManyToOne

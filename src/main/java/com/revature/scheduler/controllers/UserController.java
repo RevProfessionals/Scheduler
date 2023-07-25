@@ -1,5 +1,6 @@
 package com.revature.scheduler.controllers;
 
+import com.revature.scheduler.dtos.SharedUserDTO;
 import com.revature.scheduler.dtos.UserDTO;
 import com.revature.scheduler.models.Event;
 import com.revature.scheduler.models.SharedUser;
@@ -54,4 +55,10 @@ public class UserController {
 
     @PutMapping("{id}/shared/{sharedId}")
     public SharedUser updateSharedUserRole(@PathVariable("id") int ownerId, @PathVariable("sharedId") int sharedId, @RequestBody String roleName){return userService.updateSharedUser(ownerId,sharedId,roleName);}
+
+    @GetMapping("{id}/calendars")
+    public List<SharedUserDTO> getSharedCalendars(@PathVariable("id") int sharedId) {
+        return userService.findUsersWithSharedCalendar(sharedId);
+    }
+
 }

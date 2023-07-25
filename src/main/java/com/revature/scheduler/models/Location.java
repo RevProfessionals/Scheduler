@@ -25,6 +25,7 @@ public class Location {
     private String city;
 
     @ManyToOne
+    @JoinColumn(name = "state_id")
     private State state;
 
 

@@ -68,8 +68,6 @@ public class AuthController {
         registerDTO.getEmail(),
         passwordEncoder.encode(registerDTO.getPassword())
     );
-
-
     userDAO.save(user);
 
     Authentication authentication = new UsernamePasswordAuthenticationToken(
