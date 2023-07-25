@@ -133,7 +133,7 @@ public class EventServiceTest {
         event2.setId(2);
         expectedEvents.add(event2);
 
-        when(eventDAO.findAllByAuthor(1)).thenReturn(expectedEvents);
+        when(eventDAO.findAllByAuthor(1)).thenReturn(Optional.of(expectedEvents));
 
         List<Event> actualEvents = eventService.getAllByUserId(1);
 
