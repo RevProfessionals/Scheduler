@@ -33,6 +33,7 @@ public class User {
     private String password;
 
     @ManyToOne
+    @JoinColumn(name = "role_id")
     private Role role;
 
     @OneToMany(mappedBy = "shared", targetEntity = SharedUser.class)
@@ -46,4 +47,10 @@ public class User {
         this.email = email;
         this.password = password;
     }
+    public User(String firstName, String lastName, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+
 }

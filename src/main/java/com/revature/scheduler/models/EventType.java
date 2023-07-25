@@ -19,6 +19,6 @@ public class EventType {
     @Column(name = "event_type_id")
     private int id;
 
-    @Column(name = "type_name")
+    @Column(name = "name")
     private String name;
 }

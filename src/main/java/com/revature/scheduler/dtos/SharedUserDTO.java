@@ -1,17 +1,15 @@
 package com.revature.scheduler.dtos;
 
 import com.revature.scheduler.models.Event;
+import com.revature.scheduler.models.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.List;
 
-@AllArgsConstructor
 @Data
-
+@AllArgsConstructor
 public class SharedUserDTO {
-    private String firstName;
-    private String lastName;
-    private String email;
+    private User user;
     private List<Event> events;
 }

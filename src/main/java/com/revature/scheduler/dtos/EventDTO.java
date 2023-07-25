@@ -1,6 +1,5 @@
 package com.revature.scheduler.dtos;
 
-import com.revature.scheduler.models.EventType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

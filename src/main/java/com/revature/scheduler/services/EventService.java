@@ -3,7 +3,10 @@ package com.revature.scheduler.services;
 import com.revature.scheduler.daos.*;
 import com.revature.scheduler.dtos.EventDTO;
 import com.revature.scheduler.dtos.LocationDTO;
-import com.revature.scheduler.models.*;
+import com.revature.scheduler.models.Event;
+import com.revature.scheduler.models.Location;
+import com.revature.scheduler.models.State;
+import com.revature.scheduler.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +35,7 @@ public class EventService {
     }
 
     public List<Event> getAllByUserId(int userId) {
-        return eventDAO.findAllByAuthor(userId);
+        return eventDAO.findAllByAuthor(userId).orElseThrow();
     }
 
 
