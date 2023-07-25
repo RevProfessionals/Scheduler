@@ -76,5 +76,57 @@ public class UserServiceTest {
     }
 
 
+    @Test
+    public void testGetUserByEmail() {
+        String userEmail = "deshondixon@gmail.com";
+        User user = new User();
+
+        when(userDAO.findByEmail(userEmail)).thenReturn(user);
+
+        User result = userService.getUserByEmail(userEmail);
+
+        assertEquals(user, result);
+    }
+
+    @Test
+    public void testShareWithUser() {
+        int ownerId = 1;
+        int sharedUserId = 2;
+        String roleName = "admin";
+        User owner = new User();
+        User sharedUser = new User();
+        Role role = new Role();
+        SharedUser shared = new SharedUser(owner, sharedUser, role);
+
+        when(userDAO.findById(ownerId)).thenReturn(Optional.of(owner));
+        when(userDAO.findById(sharedUserId)).thenReturn(Optional.of(sharedUser));
+        when(roleDAO.findByName(roleName)).thenReturn(Optional.of(role));
+        when(sharedUserDAO.save(shared)).thenReturn(shared);
+
+        SharedUser result = userService.shareWithUser(ownerId, sharedUserId, roleName);
+
+        assertNotNull(result);
+        assertEquals(shared, result);
+    }
+
+    @Test
+    public void testUpdateSharedUser() {
+        int ownerId = 1;
+        int sharedUserId = 2;
+        String roleName = "admin";
+        Role role = new Role();
+        SharedUser shared = new SharedUser();
+
+        when(roleDAO.findByName(roleName)).thenReturn(Optional.of(role));
+        when(sharedUserDAO.findByOwnerAndShared(ownerId, sharedUserId)).thenReturn(Optional.of(shared));
+        when(sharedUserDAO.save(shared)).thenReturn(shared);
+
+        SharedUser result = userService.updateSharedUser(ownerId, sharedUserId, roleName);
+
+        assertNotNull(result);
+        assertEquals(shared, result);
+    }
+    
+
 
 }
